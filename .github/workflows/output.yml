@@ -8,13 +8,32 @@ on:
 
 
 jobs:
-    output-info:
+    step-output-info:
         runs-on: ubuntu-latest
+        outputs:
+            myvalue: ${{steps.set-value.outputs.value}}
         steps:
-            - name: Test the output
+            - name: Test the output in step
               id: test
               run: echo "value=hello" >>$GITHUB_OUTPUT
 
 
             - name: Refer the Output
               run: echo "The value is ${{steps.test.outputs.value}} "
+
+
+    
+    Job-output-info:
+        needs: step-output-info
+        runs-on: ubuntu-latest
+        steps:
+            - name: Test the output in job
+              id: set-value
+              run: echo "value=Good Afternoon" >> $GITHUB_OUTPUT
+
+
+            - name: Refer the output in job
+              run: echo "Test job is referring this ${{needs.step-output-info.outputs.myvalue}}"
+        
+
+    
