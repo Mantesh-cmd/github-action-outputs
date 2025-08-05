@@ -15,11 +15,11 @@ jobs:
         steps:
             - name: Test the output in step
               id: test
-              run: echo "value=hello" >>$GITHUB_OUTPUT
+              run: echo "value=hello" >> $GITHUB_OUTPUT
 
 
             - name: Refer the Output
-              run: echo "The value is ${{steps.test.outputs.value}} "
+              run: echo "The value is ${{ steps.test.outputs.value }} "
 
 
     
@@ -33,7 +33,7 @@ jobs:
 
 
             - name: Refer the output in job
-              run: echo "Test job is referring this ${{needs.step-output-info.outputs.myvalue}}"
+              run: echo "Test job is referring this ${{ needs.step-output-info.outputs.myvalue }}"
         
 
     
