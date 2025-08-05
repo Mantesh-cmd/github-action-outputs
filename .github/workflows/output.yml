@@ -11,15 +11,15 @@ jobs:
     step-output-info:
         runs-on: ubuntu-latest
         outputs:
-            myvalue: ${{steps.set-value.outputs.value}}
+            myvalue: ${{steps.set-test.outputs.value}}
         steps:
             - name: Test the output in step
-              id: test
+              id: set-test
               run: echo "value=hello" >> $GITHUB_OUTPUT
 
 
             - name: Refer the Output
-              run: echo "The value is ${{ steps.test.outputs.value }} "
+              run: echo "The value is ${{ steps.set-test.outputs.value }} "
 
 
     
